@@ -1,4 +1,4 @@
-package dev.m.krebs;
+package dev.mkrebs;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

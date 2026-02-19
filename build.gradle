@@ -16,7 +16,7 @@ dependencies {
     testImplementation 'io.rest-assured:rest-assured'
 }
 
-group = 'dev.m_krebs'
+group = 'dev.mkrebs'
 version = '1.0.0-SNAPSHOT'
 
 java {

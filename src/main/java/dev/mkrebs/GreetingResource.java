@@ -1,4 +1,4 @@
-package dev.m.krebs;
+package dev.mkrebs;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
