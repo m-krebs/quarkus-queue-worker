@@ -5,9 +5,9 @@ import org.jboss.logging.Logger;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.Startup;
 import io.vertx.mutiny.core.WorkerExecutor;
-import io.vertx.mutiny.core.Vertx;
 import jakarta.enterprise.event.Observes;
 import jakarta.inject.Singleton;
+import io.vertx.mutiny.core.Vertx;
 
 @Singleton
 @Startup
@@ -24,12 +24,15 @@ public class TrivyWorker {
     }
 
     public void scanDocker(String image) {
+        System.out.println(image);
+
         LOGGER.info("Received Trivy Scan event");
         executor.executeBlocking(() -> {
             try {
                 LOGGER.infof("Worker thread: %s", Thread.currentThread().getName());
                 LOGGER.info(String.format("Scanning %s image", image));
                 Thread.sleep(5000L);
+
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
