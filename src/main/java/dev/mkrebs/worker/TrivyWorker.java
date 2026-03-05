@@ -12,11 +12,11 @@ import io.vertx.mutiny.core.Vertx;
 @Singleton
 @Startup
 public class TrivyWorker {
-    private static final Logger LOGGER = Logger.getLogger(TrivyWorker.class);
+    private static final Logger LOG = Logger.getLogger(TrivyWorker.class);
     private final WorkerExecutor executor;
 
     TrivyWorker(Vertx vertx) {
-        executor = vertx.createSharedWorkerExecutor("trivy-scanner", 4);
+        executor = vertx.createSharedWorkerExecutor("trivy-scanner", 2);
     }
 
     void tearDown(@Observes ShutdownEvent event) {
@@ -26,17 +26,17 @@ public class TrivyWorker {
     public void scanDocker(String image) {
         System.out.println(image);
 
-        LOGGER.info("Received Trivy Scan event");
+        LOG.info("Received Trivy Scan event");
         executor.executeBlocking(() -> {
             try {
-                LOGGER.infof("Worker thread: %s", Thread.currentThread().getName());
-                LOGGER.info(String.format("Scanning %s image", image));
+                LOG.infof("Worker thread: %s", Thread.currentThread().getName());
+                LOG.info(String.format("Scanning %s image", image));
                 Thread.sleep(5000L);
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            LOGGER.info("End long running trivy image scanning event");
+            LOG.info("End long running trivy image scanning event");
             return "something";
         }, false)
                 .subscribe().with(
